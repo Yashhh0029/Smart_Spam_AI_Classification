@@ -8,7 +8,7 @@ numpy
 nltk
 transformers
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.5.1+cpu
+torch==2.11.0+cpu
 SQLAlchemy
 python-multipart
 google-api-python-client
