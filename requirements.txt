@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic[email]
+scikit-learn
+pandas
+numpy
+nltk
+transformers
+torch
+SQLAlchemy
+python-multipart
+google-api-python-client
+google-auth
+python-dateutil
