@@ -31,7 +31,7 @@ metrics_data = None
 URGENCY_KEYWORDS = [
     'urgent', 'immediate', 'action required', 'suspended', 'locked',
     'winner', 'prize', 'claim', 'invoice', 'free', 'alert', 'verify',
-    'confirm', 'update', 'limited', 'expire', 'warning', 'notice',
+    'limited', 'expire', 'warning',
 ]
 
 PHISHING_DOMAINS = re.compile(
@@ -208,7 +208,7 @@ def predict(sender: str, subject: str, body: str) -> Dict:
     nb_prob  = nb_model.predict_proba(vec)[0]
     svm_prob = svm_model.predict_proba(vec)[0]
 
-    transformer_spam_prob = 0.5
+    transformer_spam_prob = 0.3  # Conservative default on Render (transformer not loaded) to reduce false positives
     if transformer_model is not None:
         try:
             res = transformer_model(combined_text[:512])[0]
