@@ -8,11 +8,8 @@ from typing import List, Dict, Tuple
 import nltk
 from nltk.corpus import stopwords
 
-try:
-    from transformers import pipeline as hf_pipeline
-    TRANSFORMERS_AVAILABLE = True
-except ImportError:
-    TRANSFORMERS_AVAILABLE = False
+# Transformers imported dynamically to save memory on Render
+TRANSFORMERS_AVAILABLE = True
 
 try:
     stop_words = set(stopwords.words('english'))
@@ -64,8 +61,9 @@ def load_models():
         with open(metrics_path, 'r') as f:
             metrics_data = json.load(f)
 
-    if TRANSFORMERS_AVAILABLE:
+    if TRANSFORMERS_AVAILABLE and os.getenv("RENDER") != "true":
         try:
+            from transformers import pipeline as hf_pipeline
             transformer_model = hf_pipeline(
                 "text-classification",
                 model="mrm8488/bert-tiny-finetuned-sms-spam-detection"
@@ -73,6 +71,8 @@ def load_models():
             print("✅ Transformer model loaded.")
         except Exception as e:
             print(f"⚠️  Transformer model unavailable: {e}")
+    elif os.getenv("RENDER") == "true":
+        print("⚡ Free Tier Mode: Bypassing Transformer model to prevent Out-Of-Memory (OOM) crashes.")
 
 
 def clean_text(text: str) -> str:
