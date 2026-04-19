@@ -27,8 +27,9 @@ yarn-error.log*
 .eslintcache
 .vite/
 
-# Machine Learning / Models
-backend/ml/models/*.pkl
+# Machine Learning / Models — pkl files ARE committed so Render has trained models
+# backend/ml/models/*.pkl  ← intentionally allowed
+
 *.h5
 *.keras
 
