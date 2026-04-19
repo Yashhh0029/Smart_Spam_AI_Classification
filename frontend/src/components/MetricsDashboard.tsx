@@ -42,7 +42,6 @@ const MetricBar: React.FC<{ label: string; value: number; color: string }> = ({ 
 const ConfusionMatrix: React.FC<{ matrix: number[][] }> = ({ matrix }) => {
   const labels = ['True Neg', 'False Pos', 'False Neg', 'True Pos'];
   const flat = matrix.flat();
-  const max = Math.max(...flat);
   const colors = [
     { bg: 'rgba(16,185,129,0.25)', color: '#10b981' },
     { bg: 'rgba(244,63,94,0.20)',  color: '#f43f5e' },
